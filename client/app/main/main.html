@@ -23,8 +23,8 @@
 
         <div class="panel-body panel-group">
 
-          <div class="panel group" ng-repeat="(group, players) in players | groupBy: 'group'">
-            <div class="panel-heading" data-toggle="collapse" data-target="#collapse{{group}}" ng-bind="group"> </div>
+          <div class="panel group" ng-repeat="(group, players) in players | groupBy: 'group' | footballPositionSort">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapse{{group}}" ng-bind="players[0].group"> </div>
             <div id="collapse{{group}}" class="collapse in">
               <div draggable ng-repeat="player in players"
                 fixed="true" drop-value="player" border=".container" drag-class="dragging" class="player"
