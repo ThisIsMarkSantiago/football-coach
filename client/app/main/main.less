@@ -1,0 +1,138 @@
+.navbar-text {
+  margin-left: 15px;
+}
+
+.field-section {
+  padding: 4%;
+
+  form {
+    margin-bottom: 20px;
+
+    select {
+      min-width: 250px;
+    }
+  }
+
+  .field {
+    width: 100%;
+    height: 800px;
+    position: relative;
+    background-image: url('/assets/images/football-pitch.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+
+    player {
+      &.start {
+        border: thin solid #5498FD;
+      }
+      &.ok {
+        border: thin solid #5498FD;
+        background-color: #B3DFFF;
+      }
+      &.warning {
+        border: thick solid #959612;
+      }
+    }
+  }
+}
+
+.players-section {
+  .panel,.panel-heading {
+    border-radius: 0px;
+    border: none;
+  }
+
+  .panel {
+    overflow: visible;
+
+    &.squad {
+
+      > .panel-heading {
+        background-color: #DDDDDD;
+      }
+
+      > .panel-body {
+        padding: 0px;
+        margin: 0px;
+      }
+    }
+
+    &.group > .panel-heading {
+      background-color: #EEEEEE;
+      cursor: pointer;
+      &:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e114";
+        float: right;
+      }
+      &.collapsed {
+        &:after {
+          content: "\e079";
+        }
+      }
+    }
+  }
+
+  .collapse {
+    background-color: inherit;
+  }
+
+  .player {
+    display: block;
+    background-color: inherit;
+    margin: 0px;
+    padding: 10px;
+    width: 100%;
+
+    &.unavailable {
+      background-color: #FFDBDB;
+      pointer-events: none;
+
+      .player-image {
+        border-color: #FF2D2D;
+      }
+    }
+
+    &.assigned {
+      position: relative;
+      background-color: #C5EAC4;
+
+      &:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e013";
+        color: green;
+        float: right;
+        margin: 5px 5px 0px 0px;
+      }
+    }
+
+    &.modified .player-image {
+      border-color: #959612;
+    }
+
+    &.dragging {
+      display: inline-block;
+      width: auto;
+
+      > .first-name {
+        display: none
+      }
+
+      &:after {
+        content: none;
+      }
+    }
+
+    .player-image {
+      display: inline-block;
+      vertical-align: middle;
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border: 3px solid green;
+      margin-right: 5px;
+    }
+  }
+}

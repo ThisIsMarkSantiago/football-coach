@@ -1,0 +1,49 @@
+<navbar></navbar>
+
+<div class="container">
+  <div class="col-md-8">
+    <div class="bordered field-section">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="formation"> Formation: </label>
+          <select name="formation" ng-model="main.formation" class="form-control" ng-options="formation as formation.name for formation in main.formations">
+          </select>
+        </div>
+      </form>
+      <div class="field" ng-init="dropzoneClasses = { start: 'start', ok: 'ok', warning: 'warning' }">
+        <player ng-repeat="player in main.formation.players" dropzone=".player" ng-model="main.players['player' + main.formation.players.indexOf(player)]" classes="dropzoneClasses" data-x="player.x" data-y="player.y"></player>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel-group bordered players-section">
+
+      <div class="panel squad" ng-repeat="(squad, players) in main.allPlayers.player | groupBy: 'squad'">
+        <div class="panel-heading"> <b ng-bind="squad"></b> </div>
+
+        <div class="panel-body panel-group">
+
+          <div class="panel group" ng-repeat="(group, players) in players | groupBy: 'group'">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapse{{group}}" ng-bind="group"> </div>
+            <div id="collapse{{group}}" class="collapse in">
+              <div draggable ng-repeat="player in players"
+                fixed="true" drop-value="player" border=".container" drag-class="dragging" class="player"
+                ng-class="{'unavailable': player.availability == 'Not Available',
+                  'modified': player.availability == 'Modified',
+                  'assigned': main.isPlayerAssigned(player)}">
+                <div class="player-image" style="background-image: url('{{player.profilePicUrl}}');"></div>
+                <span class="first-name" ng-bind="player.firstName"></span>
+                <span class="last-name" ng-bind="player.lastName"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer></footer>
