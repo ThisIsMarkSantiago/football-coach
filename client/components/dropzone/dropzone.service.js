@@ -35,7 +35,7 @@ angular.module('footballCoachApp')
               draggable.dropzones = [];
             }
             draggable.dropzones.push(dropzone);
-            dropzone.setValue(event.draggable.draggable.dropValue);
+            dropzone.setValue(event.draggable.draggable);
             if(!dropzone.classes) return;
             $(event.target).removeClass(dropzone.classes.start);
             $(event.target).removeClass(dropzone.classes.ok);
@@ -54,9 +54,14 @@ angular.module('footballCoachApp')
         return dropzone;
       };
 
-      setValue (value) {
-        this.value = value;
-        this.onDropFunction(value);
+      setValue (draggable) {
+        this.value = draggable ? draggable.dropValue : undefined;
+        this.onDropFunction(this.value);
+
+        if(this.draggable && this.draggable.dropzones.length > 0) {
+          this.draggable.dropzones.splice(this.draggable.dropzones.indexOf(this), 1);
+        }
+        this.draggable = draggable;
       }
     };
   });
